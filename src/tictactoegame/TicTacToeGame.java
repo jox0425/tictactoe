@@ -4,7 +4,7 @@
  */
 package tictactoegame;
 
-import java.awt.SystemColor;
+import javax.swing.JMenuBar;
 
 /**
  *
@@ -12,15 +12,18 @@ import java.awt.SystemColor;
  */
 public class TicTacToeGame {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         GameFrame gf = new GameFrame();
+        InfoPanel infoPanel = new InfoPanel();
+        PlayPanel playPanel = new PlayPanel(gf.getContentPanel().getSize());
+        //GameOptionsDialog gameOptions = new GameOptionsDialog(gf);
+
         gf.initialize();
-        PlayPanel pPanel = gf.getPlaypanel();
-        //pPanel.get
-        InfoPanel iPanel = gf.getInfopanel();
-        iPanel.setBackground(SystemColor.LIGHT_GRAY);
+        gf.add(playPanel);
+        gf.add(infoPanel);
+
+
+
+
     }
 }

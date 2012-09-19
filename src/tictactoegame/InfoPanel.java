@@ -24,17 +24,16 @@ class InfoPanel extends JPanel {
     private final Font font = new Font("Arial", Font.BOLD, 30);
 
     public InfoPanel() {
-
         setLayout(new GridLayout(2, 1));
         JPanel pn1 = new JPanel(new GridLayout(2, 1));
-        pn1.add(p1name = new JLabel("Player1 Score:", JLabel.CENTER));
+        pn1.add(p1name = new JLabel(Players.getPlayer1Name() + " Score:", JLabel.CENTER));
         p1name.setFont(font);
         pn1.add(p1score = new JLabel("0", JLabel.CENTER));
         p1score.setFont(font);
         add(pn1);
 
         JPanel pn2 = new JPanel(new GridLayout(2, 1));
-        pn2.add(p2name = new JLabel("Player2 Score:", JLabel.CENTER));
+        pn2.add(p2name = new JLabel(Players.getPlayer2Name() + " Score:", JLabel.CENTER));
         p2name.setFont(font);
         pn2.add(p2score = new JLabel("0", JLabel.CENTER));
         p2score.setFont(font);

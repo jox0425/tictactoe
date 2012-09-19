@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  * @author Gyarmati János
  */
 public class GameOptionsDialog extends JDialog {
-
+    private Players p1,p2;
     private String player1Name, player2Name;
     private JTextField tfP1, tfP2;
     private JButton btOk, btCancel;
@@ -41,13 +41,11 @@ public class GameOptionsDialog extends JDialog {
     }
 
     public GameOptionsDialog(JFrame owner) {
-        super(owner,"Options",false);
+        super(owner, "Options", false);
         Container cp = getContentPane();
-        setSize(400, 150);
+        setSize(getParent().getWidth()/2,getParent().getHeight()/2);
         setResizable(false);
         setLocation(getParent().getX() + getWidth() / 2, getParent().getY() + getHeight() / 2);
-        player1Name = "Player 1";
-        player2Name = "Player 2";
 
         JPanel pn1 = new JPanel();
         pn1.add(new JLabel("Player 1 name: "));
@@ -68,7 +66,11 @@ public class GameOptionsDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setPlayer1Name(validateField(tfP1));
+                Players.setPlayer1Name(validateField(tfP1));
                 setPlayer2Name(validateField(tfP2));
+                Players.setPlayer2Name(validateField(tfP2));
+                
+                dispose();
             }
         });
 

@@ -25,8 +25,8 @@ import javax.swing.JOptionPane;
  *
  * @author Gyarmati János
  */
-class GameFrame extends JFrame {
-
+class GameFrame extends JFrame implements ActionListener {
+    private Players player1,player2;
     private GameFrame gameframe;
     private Container ContentPanel;
     private JMenuBar mbMainMenu;
@@ -43,8 +43,10 @@ class GameFrame extends JFrame {
     private String about = "TicTacToe game 1.0"
             + "\nCreated by Janos Gyarmati"
             + "\nAll rights reserved";
-
+    
     public GameFrame() {
+        this.player1 = player1;
+        this.player2 = player2;
         setTitle("TicTacToe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         ContentPanel = getContentPane();
@@ -57,30 +59,19 @@ class GameFrame extends JFrame {
                 GameFrameWidth, GameFrameHeight);
         setVisible(true);
     }
-
-    public PlayPanel getPlaypanel() {
-        return playpanel;
+    
+    public Container getContentPanel() {
+        return ContentPanel;
     }
-
-    public void setPlaypanel(PlayPanel playpanel) {
-        this.playpanel = playpanel;
+    
+    public void setContentPanel(Container ContentPanel) {
+        this.ContentPanel = ContentPanel;
     }
-
-    public InfoPanel getInfopanel() {
-        return infopanel;
-    }
-
-    public void setInfopanel(InfoPanel infopanel) {
-        this.infopanel = infopanel;
-    }
-
-    void initialize() {
+    
+    public void initialize() {
         createMenu();
-        addListeners();
-        createPlayPanel();
-        createInfoPanel();
     }
-
+    
     private void createMenu() {
         setJMenuBar(mbMainMenu = new JMenuBar());
         mbMainMenu.add(mFile = new JMenu("File"));
@@ -90,50 +81,34 @@ class GameFrame extends JFrame {
         mFile.add(miExit = new JMenuItem("Exit"));
         mHelp.add(miHowto = new JMenuItem("How to play"));
         mHelp.add(miAbout = new JMenuItem("About"));
+        
+        miNewGame.addActionListener(this);
+        miOptions.addActionListener(this);
+        miExit.addActionListener(this);
+        miHowto.addActionListener(this);
+        miAbout.addActionListener(this);
     }
-
-    private void createPlayPanel() {
-        ContentPanel = getContentPane();
-        ContentPanel.add(playpanel = new PlayPanel(ContentPanel.getSize()));
-    }
-
-    private void createInfoPanel() {
-        ContentPanel = getContentPane();
-        ContentPanel.add(infopanel = new InfoPanel());
-    }
-
-    private void addListeners() {
-        miNewGame.addActionListener(alFileMenu = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                String[] args = null;
-                TicTacToeGame.main(args);
-            }
-        });
-        miOptions.addActionListener(alFileMenu = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameOptionsDialog god = new GameOptionsDialog(gameframe);
-            }
-        });
-        miExit.addActionListener(alFileMenu = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        miHowto.addActionListener(alHelpMenu = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(gameframe, howToPlay, "How to play", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        miAbout.addActionListener(alHelpMenu = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(gameframe, about, "About", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object src = e.getSource();
+        
+        if (src.equals(miNewGame)) {
+            setVisible(false);
+            String[] args = null;
+            TicTacToeGame.main(args);
+        }
+        if (src.equals(miOptions)) {
+            GameOptionsDialog god = new GameOptionsDialog(this);
+        }
+        if (src.equals(miExit)) {
+            System.exit(0);
+        }
+        if (src.equals(miHowto)) {
+            JOptionPane.showMessageDialog(gameframe, howToPlay, "How to play", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (src.equals(miAbout)) {
+            JOptionPane.showMessageDialog(gameframe, about, "About", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

@@ -58,7 +58,7 @@ class InfoPanel extends JPanel {
 
     public void setP2score(int p2score) {
         this.p2score = p2score;
-        lbP1score.setText(Integer.toString(p2score));
+        lbP2score.setText(Integer.toString(p2score));
     }
     
     public InfoPanel(Player player1,Player player2) {

@@ -43,10 +43,13 @@ public class TicTacToeGame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds((screenSize.width-frameWidth)/2, (screenSize.height-frameHeight)/2, frameWidth, frameHeight);
         contentPanel.setLayout(new GridLayout(1, 2));
-        contentPanel.add(playPanel);
+        contentPanel.add(playPanel = new PlayPanel(getSize()));
         contentPanel.add(infoPanel);
-        playPanel.setPanelSize(getSize());
-        playPanel.upload();
+        playPanel.uploadPanelWithSquares();       
+        playPanel.setPlayer1(player1);
+        playPanel.setPlayer2(player2);
+        playPanel.setInfoPanel(infoPanel);
+        
     }
 
     private void initComponents() {
@@ -59,7 +62,7 @@ public class TicTacToeGame extends JFrame {
         miExit = new JMenuItem();
         miAbout = new JMenuItem();
         miHowto = new JMenuItem();
-        playPanel = new PlayPanel();
+        //playPanel = new PlayPanel();
         infoPanel = new InfoPanel();
         howToPlay = "The X player usually goes first[citation needed]."
                 + "\nThe player who succeeds in placing three respective marks in a "

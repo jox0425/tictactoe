@@ -42,6 +42,24 @@ class InfoPanel extends JPanel {
         this.p2name = p2name;
         lbP2name.setText(this.p2name+ " Score:");
     }
+
+    public int getP1score() {
+        return p1score;
+    }
+
+    public void setP1score(int p1score) {
+        this.p1score = p1score;
+        lbP1score.setText(Integer.toString(p1score));
+    }
+
+    public int getP2score() {
+        return p2score;
+    }
+
+    public void setP2score(int p2score) {
+        this.p2score = p2score;
+        lbP1score.setText(Integer.toString(p2score));
+    }
     
     public InfoPanel() {
         p1name = "Player 1";

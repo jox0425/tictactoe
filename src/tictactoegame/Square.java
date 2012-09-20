@@ -18,7 +18,7 @@ class Square extends JComponent {
 
     private int width, height;
     private boolean clicked;
-    private int paintType;           //ez tárolja hogy x-et mutat, o-t vagy semmit.
+    private int paintType;           //ez tárolja hogy x-et rajzol(0), vagy o-t (1)
 
     public int getPaintType() {
         return paintType;

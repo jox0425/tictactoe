@@ -27,7 +27,15 @@ class PlayPanel extends JPanel {
 
     private ArrayList squares = new ArrayList();
     private double playPanelWidth, playPanelHeight;
-    private Dimension size;
+    private Dimension panelSize, size;
+
+    public Dimension getPanelSize() {
+        return panelSize;
+    }
+
+    public void setPanelSize(Dimension panelSize) {
+        this.panelSize = panelSize;
+    }
     private Square square;
     private int clicks = 0;
     private int actSquareIndex;
@@ -84,17 +92,17 @@ class PlayPanel extends JPanel {
         System.out.println("endgame");
     }
 
-    public PlayPanel(Dimension d) {
-        Dimension panelSize = d;
+    public PlayPanel() {
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.lightGray, Color.black));
-        setSize(panelSize.width, panelSize.height);
         setLayout(new GridLayout(3, 3));
+        /*setSize(panelSize.width, panelSize.height);
+
         size = getSize();
         for (int i = 0; i < 9; i++) {
             add(square = new Square(panelSize.width, panelSize.height));
             squares.add(square);
             square.addMouseListener(mouseAdapter);
-        }
+        }*/
 
     }
 
@@ -131,11 +139,10 @@ class PlayPanel extends JPanel {
                 if (oList.containsAll(winList)) {
                     endGame(0);
                     return true;
-                }
-                else if (xList.containsAll(winList)) {
+                } else if (xList.containsAll(winList)) {
                     endGame(1);
                     return true;
-                }else if (oList.size()==5 && xList.size()==4){
+                } else if (oList.size() == 5 && xList.size() == 4) {
                     endGame(2);
                     return true;
                 }
@@ -154,9 +161,19 @@ class PlayPanel extends JPanel {
         if (winnerCode == 1) {
             winner = "X";
         }
-        if (winnerCode == 2){
+        if (winnerCode == 2) {
             winner = "Senki sem";
         }
         System.out.println(winner + " nyert!");
+    }
+
+    void upload() {
+        setSize(panelSize.width, panelSize.height);
+        size = getSize();
+        for (int i = 0; i < 9; i++) {
+            add(square = new Square(panelSize.width, panelSize.height));
+            squares.add(square);
+            square.addMouseListener(mouseAdapter);
+        }
     }
 }

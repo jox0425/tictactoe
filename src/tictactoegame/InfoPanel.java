@@ -20,23 +20,48 @@ import javax.swing.JPanel;
  */
 class InfoPanel extends JPanel {
 
-    private JLabel p1name, p2name, p1score, p2score;
-    private final Font font = new Font("Arial", Font.BOLD, 30);
+    private JLabel lbP1name,lbP2name,lbP1score,lbP2score;
+    private String p1name,p2name;
+    private int p1score,p2score;
+    private final Font font = new Font("Arial", Font.BOLD, 30); 
 
+    public String getP1name() {
+        return p1name;
+    }
+
+    public void setP1name(String p1name) {
+        this.p1name = p1name;
+        lbP1name.setText(this.p1name + " Score:");
+    }
+
+    public String getP2name() {
+        return p2name;
+    }
+
+    public void setP2name(String p2name) {
+        this.p2name = p2name;
+        lbP2name.setText(this.p2name+ " Score:");
+    }
+    
     public InfoPanel() {
+        p1name = "Player 1";
+        p2name = "Player 2";
+        p1score = 0;
+        p2score = 0;
+        
         setLayout(new GridLayout(2, 1));
         JPanel pn1 = new JPanel(new GridLayout(2, 1));
-        pn1.add(p1name = new JLabel(Players.getPlayer1Name() + " Score:", JLabel.CENTER));
-        p1name.setFont(font);
-        pn1.add(p1score = new JLabel("0", JLabel.CENTER));
-        p1score.setFont(font);
+        pn1.add(lbP1name= new JLabel(p1name + " Score:", JLabel.CENTER));
+        lbP1name.setFont(font);
+        pn1.add(lbP1score = new JLabel(Integer.toString(p1score), JLabel.CENTER));
+        lbP1score.setFont(font);
         add(pn1);
 
         JPanel pn2 = new JPanel(new GridLayout(2, 1));
-        pn2.add(p2name = new JLabel(Players.getPlayer2Name() + " Score:", JLabel.CENTER));
-        p2name.setFont(font);
-        pn2.add(p2score = new JLabel("0", JLabel.CENTER));
-        p2score.setFont(font);
+        pn2.add(lbP2name = new JLabel(p2name + " Score:", JLabel.CENTER));
+        lbP2name.setFont(font);
+        pn2.add(lbP2score = new JLabel(Integer.toString(p2score), JLabel.CENTER));
+        lbP2score.setFont(font);
         add(pn2);
     }
 

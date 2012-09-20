@@ -4,7 +4,9 @@
  */
 package tictactoegame;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,31 +21,35 @@ import javax.swing.JTextField;
  * @author Gyarmati János
  */
 public class GameOptionsDialog extends JDialog {
-    private Players p1,p2;
-    private String player1Name, player2Name;
+
     private JTextField tfP1, tfP2;
     private JButton btOk, btCancel;
+    private String p1name;
+    private String p2name;
 
-    public String getPlayer1Name() {
-        return player1Name;
+    public String getP1name() {
+        return p1name;
     }
 
-    public void setPlayer1Name(String player1Name) {
-        this.player1Name = player1Name;
+    public void setP1name(String p1name) {
+        this.p1name = p1name;
     }
 
-    public String getPlayer2Name() {
-        return player2Name;
+    public String getP2name() {
+        return p2name;
     }
 
-    public void setPlayer2Name(String player2Name) {
-        this.player2Name = player2Name;
+    public void setP2name(String p2name) {
+        this.p2name = p2name;
     }
 
     public GameOptionsDialog(JFrame owner) {
-        super(owner, "Options", false);
+        super(owner, "Options", true);
+        p1name = "Player 1";
+        p2name = "Player 2";
         Container cp = getContentPane();
-        setSize(getParent().getWidth()/2,getParent().getHeight()/2);
+        cp.setLayout(new GridLayout(3, 1));
+        setSize(getParent().getWidth() / 2, getParent().getHeight() / 2);
         setResizable(false);
         setLocation(getParent().getX() + getWidth() / 2, getParent().getY() + getHeight() / 2);
 
@@ -51,13 +57,13 @@ public class GameOptionsDialog extends JDialog {
         pn1.add(new JLabel("Player 1 name: "));
         pn1.add(tfP1 = new JTextField(10));
         tfP1.setName("tfP1");
-        cp.add(pn1, "North");
+        cp.add(pn1);
 
         JPanel pn2 = new JPanel();
         pn2.add(new JLabel("Player 2 name: "));
         pn2.add(tfP2 = new JTextField(10));
         tfP2.setName("tfP2");
-        cp.add(pn2, "Center");
+        cp.add(pn2);
 
         JPanel pn3 = new JPanel();
         pn3.add(btOk = new JButton("Ok"));
@@ -65,11 +71,10 @@ public class GameOptionsDialog extends JDialog {
         btOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setPlayer1Name(validateField(tfP1));
-                Players.setPlayer1Name(validateField(tfP1));
-                setPlayer2Name(validateField(tfP2));
-                Players.setPlayer2Name(validateField(tfP2));
-                
+                if (isValid(tfP1.getText()) && isValid(tfP2.getText())) {
+                    setP1name(tfP1.getText());
+                    setP2name(tfP2.getText());
+                }
                 dispose();
             }
         });
@@ -80,23 +85,13 @@ public class GameOptionsDialog extends JDialog {
                 dispose();
             }
         });
-        cp.add(pn3, "South");
-        setVisible(true);
+        cp.add(pn3);
     }
 
-    private String validateField(JTextField field) {
-        String name = field.getText().trim();
-
-        if (name.equals("")) {
-            switch (field.getName()) {
-                case "tfP1":
-                    name = "Player 1";
-                    break;
-                case "tfP2":
-                    name = "Player 2";
-                    break;
-            }
+    private boolean isValid(String name) {
+        if (name.trim().length() > 0) {
+            return true;
         }
-        return name;
+        return false;
     }
 }

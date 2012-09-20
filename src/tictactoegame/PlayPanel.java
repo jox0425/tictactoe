@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -151,11 +152,12 @@ class PlayPanel extends JPanel {
             winner = player2.getName();
             player2.setScore(player2.getScore()+1);
             infoPanel.setP2score(player2.getScore());
+            
         }
         if (winnerCode == 2) {
             winner = "Senki sem";
         }
-        System.out.println(winner + " nyert!");
+        JOptionPane.showMessageDialog(this, winner + " nyert!");
     }
 
     public void uploadPanelWithSquares() {

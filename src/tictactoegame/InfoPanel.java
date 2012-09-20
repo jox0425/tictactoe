@@ -61,11 +61,11 @@ class InfoPanel extends JPanel {
         lbP1score.setText(Integer.toString(p2score));
     }
     
-    public InfoPanel() {
-        p1name = "Player 1";
-        p2name = "Player 2";
-        p1score = 0;
-        p2score = 0;
+    public InfoPanel(Player player1,Player player2) {
+        p1name = player1.getName();
+        p2name = player2.getName();
+        p1score = player1.getScore();
+        p2score = player2.getScore();
         
         setLayout(new GridLayout(2, 1));
         JPanel pn1 = new JPanel(new GridLayout(2, 1));

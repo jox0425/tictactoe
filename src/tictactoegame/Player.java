@@ -38,7 +38,7 @@ public class Player {
         this.winner = winner;
     }
     
-    public Player(int score, String name) {
+    public Player(String name, int score) {
         this.name = name;
         this.score = score;
     }
